@@ -1,740 +1,527 @@
 {
 	"info": {
-		"_postman_id": "d78512a9-beed-4eaf-b554-59cd7a3bacc8",
-		"name": "SERVIELECTROGAS",
+		"_postman_id": "fd22b9fc-8e4d-4755-9871-800ca3c0e31f",
+		"name": "Servielectrogas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "14184269"
+		"_exporter_id": "22797177"
 	},
 	"item": [
 		{
-			"name": "Registrar Clientes",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"document\": \"1007327588\",\r\n    \"names\": \"Karen Daniela Medina Tovar\",\r\n    \"phone\": \"3203391690\",\r\n    \"email\": \"karenmedina478@gmail.com\",\r\n    \"address\": \"Carrera 70B # 105 - 46\",\r\n    \"type\": \"DIRECTO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Ordenes de Trabajo",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orders?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/clients/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Regitrar Orden de Servicio",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"services\": [\r\n        {\r\n            \"servicesType\": \"Instalación\",\r\n            \"servicesDescription\": \"Instalacion de gasodomestico\",\r\n            \"price\": 100000\r\n        }\r\n    ],\r\n    \"status\": \"En proceso\",\r\n    \"infoClient\": \"3203391690\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orders/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orders",
+								"17"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/orders/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Registrar Agenda",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"date\": \"2023-12-03\",\r\n    \"hour\": \"8:00 - 9:00\",\r\n    \"idOrder\": 1,\r\n    \"idUser\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Registrar Usuario",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Hector Medina\",\r\n    \"email\": \"hectormedina65@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"type\": \"TECNICO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/users/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Orden De Servicio Por Cliente",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n   \"client\":{\r\n      \"document\":\"1007327588\",\r\n      \"names\":\"Karen Medina\",\r\n      \"phone\":\"3203391690\",\r\n      \"phone1\":\"N/A\",\r\n      \"phone2\":\"N/A\",\r\n      \"email\":\"tovarbibiana@gmail.com\",\r\n      \"address\":\"Carrera 70B # 105 - 46\",\r\n      \"nameOfApplicant\":\"N/A\",\r\n      \"numberOrderVendor\":\"N/A\",\r\n      \"type\":\"DIRECTO\"\r\n   },\r\n   \"order\":{\r\n      \"id\":12237,\r\n      \"observations\": \"Cliente solicito nuevo servicio\",\r\n      \"services\":[\r\n         {\r\n            \"servicesType\":\"INSTALACION\",\r\n            \"servicesDescription\":\"Estufa\",\r\n            \"price\":2000\r\n         }\r\n      ],\r\n      \"status\":\"PROGRESO\",\r\n      \"totalCharged\":2000\r\n   },\r\n   \"schedules\":{\r\n      \"date\":\"2023-12-12\",\r\n      \"hour\":\"9:00 - 10:00 AM\",\r\n      \"idUser\": 1,\r\n      \"idOrder\":12237\r\n   }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/registerAll",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"registerAll"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Clientes",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/clients/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Ordenes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/orders/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Agendas",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Usuarios",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modificar Cliente",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"document\": \"1007327588\",\r\n    \"names\": \"Karen Daniela Medina Tovar\",\r\n    \"phone\": \"3203391690\",\r\n    \"phone1\": \"3124799494\",\r\n    \"phone2\": \"3118217628\",\r\n    \"email\": \"karenmedina478@gmail.com\",\r\n    \"address\": \"Calle 53A # 96A - 23\",\r\n    \"nameOfApplicant\":\"N/A\",\r\n    \"numberOrderVendor\":\"N/A\",\r\n    \"type\": \"DIRECTO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/clients/update",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients",
-						"update"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modificar Orden",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 12234,\r\n    \"observations\": \"Cliente solicito 2 nuevos servicios\",\r\n    \"services\": [\r\n        {\r\n            \"id\": 1,\r\n            \"servicesType\": \"INSTALACION\",\r\n            \"servicesDescription\": \"Instalacion de gasodomestico\",\r\n            \"price\": 100000\r\n        },\r\n        {\r\n            \"servicesType\": \"MANTENIMIENTO\",\r\n            \"servicesDescription\": \"Estufa\",\r\n            \"price\": 50000\r\n        },\r\n        {\r\n            \"servicesType\": \"REPARACION\",\r\n            \"servicesDescription\": \"Calentador\",\r\n            \"price\": 100000\r\n        }\r\n    ],\r\n    \"status\": \"PROGRESO\",\r\n    \"infoClient\": \"3203391690\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/orders/update",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"update"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modificar Agenda",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"date\": \"2023-12-15\",\r\n    \"hour\": \"10:00 - 11:00\",\r\n    \"idOrder\": 12236,\r\n    \"idUser\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/update",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"update"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Cliente Por Numero de Telefono",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/clients/clientBy?phone=3203391690",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients",
-						"clientBy"
-					],
-					"query": [
-						{
-							"key": "phone",
-							"value": "3203391690"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Tecnico Por Nombre",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users/byName?name=Hector Julio Medina Patalagua",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"byName"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Hector Julio Medina Patalagua"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Generaracion de Excel",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/download/reporte.xlsx?date=2023-12-12",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"download",
-						"reporte.xlsx"
-					],
-					"query": [
-						{
-							"key": "date",
-							"value": "2023-12-12"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/users/login?email=hectormedina65@gmail.com&password=12345678",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"login"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "hectormedina65@gmail.com"
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Test observación\",\r\n    \"status\": 0,\r\n    \"clientId\": 2,\r\n    \"orderServices\": [\r\n        {\r\n            \"serviceId\": 1,\r\n            \"observations\": \"Observación servicio 1\",\r\n            \"priority\": 2,\r\n            \"duration\": \"PT500S\",\r\n            \"status\": 0,\r\n            \"orderServiceDate\": \"2024-05-29T21:34:35.099\",\r\n        }\r\n    ],\r\n    \"technicianId\": 1,\r\n    \"scheduleDate\": \"2024-06-03\",\r\n    \"scheduleTime\": \"18:26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "password",
-							"value": "12345678"
+						"url": {
+							"raw": "http://localhost:8081/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orders"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Agenda Por Id Orden de servicio",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/byIdOrder?idOrder=12236",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"byIdOrder"
-					],
-					"query": [
-						{
-							"key": "idOrder",
-							"value": "12236"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Ordenes Por Cliente",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/orders/ordersByClient?id=1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"ordersByClient"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Agenda Por Usuario",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/byIdUser?email=hectormedina65@gmail.com",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"byIdUser"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "hectormedina65@gmail.com"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Orden de servicio por estado",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/orders/status?status=PROGRESO",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"status"
-					],
-					"query": [
-						{
-							"key": "status",
-							"value": "PROGRESO"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Order de servicio por id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/orders/byId?id=12236",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"orders",
-						"byId"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "12236"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modificar Usuarios",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Hector Julio Medina Patalagua\",\r\n    \"email\": \"hectormedina65@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"type\": \"TECNICO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/users/update",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"update"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Usuario",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/users/delete/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"delete",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Clientes",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/clients/delete/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients",
-						"delete",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Agendas",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/schedules/delete/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"schedules",
-						"delete",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Consultar Ordenes y Agendas por Usuario",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users/scheduleByUser?email=hectormedina65@gmail.com",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"scheduleByUser"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "hectormedina65@gmail.com"
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orderServices/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orderServices",
+								"3"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Only updated 2\",\r\n    \"status\": 3,\r\n    \"clientId\": 1,\r\n    \"technicianId\": 2,\r\n    \"scheduleDate\": \"2024-06-08\",\r\n    \"scheduleTime\": \"12:39:00\",\r\n    \"totalCharged\": 2600,\r\n    \"aditionalCharged\": 100,\r\n    \"orderServices\": [\r\n        {\r\n            \"id\": 16,\r\n            \"ordersId\": null,\r\n            \"service\": {\r\n                \"id\": 2,\r\n                \"servicesType\": 0,\r\n                \"servicesDescription\": \"Instalación de nevera\",\r\n                \"price\": 2500\r\n            },\r\n            \"serviceId\": 2,\r\n            \"observations\": \"Observación servicio 1 updated\",\r\n            \"orderServiceDate\": \"2024-06-10T00:00:00.000\",\r\n            \"duration\": \"PT46800S\",\r\n            \"price\": 2500,\r\n            \"priorityName\": \"ALTA\",\r\n            \"priority\": 0,\r\n            \"statusName\": \"CANCELADA\",\r\n            \"status\": 3,\r\n            \"createdAt\": \"2024-06-09T12:39:05.406335\",\r\n            \"technicianName\": \"Andrés Piñeros\",\r\n            \"technicianId\": 1,\r\n            \"alreadyCreated\": true\r\n        }\r\n    ]\r\n}\r\n\r\n{\r\n    \"observations\": \"Only updated 2\",\r\n    \"status\": 3,\r\n    \"clientId\": 1,\r\n    \"technicianId\": 2,\r\n    \"scheduleDate\": \"2024-06-08\",\r\n    \"scheduleTime\": \"12:39:00\",\r\n    \"totalCharged\": 3600,\r\n    \"aditionalCharged\": 100,\r\n    \"orderServices\": [\r\n        {\r\n            \"id\": 16,\r\n            \"ordersId\": null,\r\n            \"service\": {\r\n                \"id\": 2,\r\n                \"servicesType\": 0,\r\n                \"servicesDescription\": \"Instalación de nevera\",\r\n                \"price\": 2500\r\n            },\r\n            \"serviceId\": 2,\r\n            \"observations\": \"Observación servicio 1 updated\",\r\n            \"orderServiceDate\": \"2024-06-10T00:00:00.000\",\r\n            \"duration\": \"PT46800S\",\r\n            \"price\": 2500,\r\n            \"priorityName\": \"ALTA\",\r\n            \"priority\": 0,\r\n            \"statusName\": \"CANCELADA\",\r\n            \"status\": 3,\r\n            \"createdAt\": \"2024-06-09T12:39:05.406335\",\r\n            \"technicianName\": \"Andrés Piñeros\",\r\n            \"technicianId\": 1,\r\n            \"alreadyCreated\": true\r\n        },\r\n        {\r\n            \"serviceId\": 1,\r\n            \"observations\": \"Test\",\r\n            \"priority\": \"2\",\r\n            \"status\": \"0\",\r\n            \"duration\": \"PT41580S\",\r\n            \"orderServiceDate\": \"2024-06-09T00:00:00.000\",\r\n            \"price\": 1000,\r\n            \"alreadyCreated\": false\r\n        }\r\n    ]\r\n}\r\n\r\n{\r\n    \"observations\": \"Test creation 1\",\r\n    \"status\": \"0\",\r\n    \"clientId\": 2,\r\n    \"orderServices\": [\r\n        {\r\n            \"serviceId\": 1,\r\n            \"observations\": \"asasasas\",\r\n            \"priority\": \"2\",\r\n            \"status\": \"0\",\r\n            \"duration\": \"PT4800S\",\r\n            \"orderServiceDate\": \"2024-06-09T00:00:00.000\",\r\n            \"price\": 1000\r\n        }\r\n    ],\r\n    \"technicianId\": 1,\r\n    \"scheduleDate\": \"2024-06-09\",\r\n    \"scheduleTime\": \"23:27\",\r\n    \"totalCharged\": 1000,\r\n    \"aditionalCharged\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/orderServices/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orderServices",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orders/export",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orders",
+								"export"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/users/login?email=andres.vpineros@gmail.com&password=12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "andres.vpineros@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/users/search?name=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Andrés Piñeros\",\r\n    \"email\": \"andres.vpineros@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"type\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/clients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/clients/search?names=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"clients",
+								"search"
+							],
+							"query": [
+								{
+									"key": "names",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ordenes de Servicio",
+			"item": [
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orderServices/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orderServices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": 1,\r\n    \"serviceId\": 1,\r\n    \"observations\": \"Test observation 4\",\r\n    \"orderServiceDate\": \"2024-05-31T00:27:17.7528535\",\r\n    \"duration\": 5,\r\n    \"priority\": 1,\r\n    \"status\": 1,\r\n    \"technicianId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/orderServices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orderServices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Servicios",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/services/search?description=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"services",
+								"search"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agendamiento",
+			"item": [
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orderServices/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orderServices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/schedules?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"schedules"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evidencias",
+			"item": [
+				{
+					"name": "Upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Brandon Vargas/Downloads/Orden médica.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/evidences/upload/:orderServiceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"evidences",
+								"upload",
+								":orderServiceId"
+							],
+							"variable": [
+								{
+									"key": "orderServiceId",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by OrderServiceId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/evidences/view/:orderServiceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"evidences",
+								"view",
+								":orderServiceId"
+							],
+							"variable": [
+								{
+									"key": "orderServiceId",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
