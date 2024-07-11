@@ -10,17 +10,21 @@ public class ServicesDTO {
 	private EServicesType servicesTypeName;
 	private Integer servicesType;
 	private String servicesDescription;
+	private String productName;
 	private Long price;
+	private Long warrantyTime;
 	
 	public ServicesDTO() {
 	}
 	
-    public ServicesDTO(Integer id, String servicesDescription, Long price, EServicesType servicesTypeName, Integer servicesType) {
+    public ServicesDTO(Integer id, String servicesDescription, Long price, EServicesType servicesTypeName, Integer servicesType, String productName, Long warrantyTime) {
         this.id = id;
         this.servicesTypeName = servicesTypeName;
         this.servicesType = servicesType;
         this.servicesDescription = servicesDescription;
+        this.productName = productName;
         this.price = price;
+        this.warrantyTime = warrantyTime;
     }
     
     public Integer getId() {
@@ -55,11 +59,27 @@ public class ServicesDTO {
         this.servicesDescription = servicesDescription;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    
     public Long getPrice() {
         return price;
     }
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+    
+    public Long getWarrantyTime() {
+        return warrantyTime;
+    }
+
+    public void setWarrantyTime(Long warrantyTime) {
+        this.warrantyTime = warrantyTime;
     }
 }

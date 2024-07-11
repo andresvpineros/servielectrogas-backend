@@ -29,6 +29,4 @@ public class ServicesController {
         ApiResponseDTO<List<ServicesDTO>> response = new ApiResponseDTO<>("Success", HttpStatus.OK.value(), users);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-   
-
 }

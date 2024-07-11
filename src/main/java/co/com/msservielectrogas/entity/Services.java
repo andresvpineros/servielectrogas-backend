@@ -23,6 +23,12 @@ public class Services {
 
     @Column(nullable = false)
     private Long price;
+    
+    @Column(nullable = false)
+    private String productName;
+    
+    @Column(nullable = false)
+    private Long warrantyTime;
 
     // Getters and Setters
     public Integer getId() {
@@ -48,6 +54,14 @@ public class Services {
     public void setServicesDescription(String servicesDescription) {
         this.servicesDescription = servicesDescription;
     }
+    
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public Long getPrice() {
         return price;
@@ -55,5 +69,13 @@ public class Services {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+    
+    public Long getWarrantyTime() {
+        return warrantyTime;
+    }
+
+    public void setWarrantyTime(Long warrantyTime) {
+        this.warrantyTime = warrantyTime;
     }
 }

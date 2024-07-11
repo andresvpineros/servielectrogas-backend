@@ -7,7 +7,6 @@ import co.com.msservielectrogas.dto.UpdateServiceActivityDTO;
 import co.com.msservielectrogas.repository.IClientRepository;
 import co.com.msservielectrogas.repository.IOrderRepository;
 import co.com.msservielectrogas.repository.IUsersRepository;
-import co.com.msservielectrogas.specification.ServiceActivitySpecifications;
 import co.com.msservielectrogas.enums.EClientType;
 import co.com.msservielectrogas.enums.EPriority;
 import co.com.msservielectrogas.enums.EStatus;

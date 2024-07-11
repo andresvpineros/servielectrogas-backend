@@ -1,13 +1,12 @@
 package co.com.msservielectrogas.dto;
 
+import java.util.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import co.com.msservielectrogas.entity.Order;
 import co.com.msservielectrogas.entity.Services;
-import co.com.msservielectrogas.entity.Users;
 import co.com.msservielectrogas.enums.EPriority;
 import co.com.msservielectrogas.enums.EStatus;
 import lombok.Data;
@@ -30,8 +29,13 @@ public class OrderServiceDTO {
     private EStatus statusName;
     private Integer status;
     private LocalDateTime createdAt;
+    private Long warrantyOrderServiceId;
     private String technicianName;
     private Integer technicianId;
+    
+    private Date warrantyStartDate;
+    private Date warrantyEndDate;
+    private String warrantyReason;
 
     private Boolean alreadyCreated;
 
@@ -42,7 +46,7 @@ public class OrderServiceDTO {
         this.id = id;
     }
         
-    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId) {
+    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId, Date warrantyStartDate, Date warrantyEndDate, String warrantyReason, Long warrantyOrderServiceId) {
         this.id = id;
         this.service = service;
         this.serviceId = serviceId;
@@ -54,9 +58,13 @@ public class OrderServiceDTO {
         this.createdAt = createdAt;
         this.technicianName = technicianName;
         this.technicianId = technicianId;
+        this.warrantyStartDate = warrantyStartDate;
+        this.warrantyEndDate = warrantyEndDate;
+        this.warrantyReason = warrantyReason;
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
     }
     
-    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId, Boolean alreadyCreated) {
+    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId, Boolean alreadyCreated, Date warrantyStartDate, Date warrantyEndDate, String warrantyReason, Long warrantyOrderServiceId) {
         this.id = id;
         this.service = service;
         this.serviceId = serviceId;
@@ -69,9 +77,13 @@ public class OrderServiceDTO {
         this.technicianName = technicianName;
         this.technicianId = technicianId;
         this.alreadyCreated = alreadyCreated;
+        this.warrantyStartDate = warrantyStartDate;
+        this.warrantyEndDate = warrantyEndDate;
+        this.warrantyReason = warrantyReason;
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
     }
     
-    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, EPriority priorityName, Integer priority, EStatus statusName, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId) {
+    public OrderServiceDTO(Long id, Long orderId, Services service, Integer serviceId, String observations, LocalDateTime orderServiceDate, Duration duration, EPriority priorityName, Integer priority, EStatus statusName, Integer status, LocalDateTime createdAt, String technicianName, Integer technicianId, Date warrantyStartDate, Date warrantyEndDate, String warrantyReason, Long warrantyOrderServiceId) {
         this.id = id;
         this.service = service;
         this.serviceId = serviceId;
@@ -85,9 +97,13 @@ public class OrderServiceDTO {
         this.createdAt = createdAt;
         this.technicianName = technicianName;
         this.technicianId = technicianId;
+        this.warrantyStartDate = warrantyStartDate;
+        this.warrantyEndDate = warrantyEndDate;
+        this.warrantyReason = warrantyReason;
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
     }
     
-    public OrderServiceDTO(Long id,  Long orderId, Services service, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, Integer technicianId, Boolean alreadyCreated) {
+    public OrderServiceDTO(Long id,  Long orderId, Services service, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, Integer technicianId, Boolean alreadyCreated, Date warrantyStartDate, Date warrantyEndDate, String warrantyReason, Long warrantyOrderServiceId) {
         this.id = id;
         this.orderId = orderId;
         this.service = service;
@@ -99,6 +115,10 @@ public class OrderServiceDTO {
         this.createdAt = createdAt;
         this.technicianId = technicianId;
         this.alreadyCreated = alreadyCreated;
+        this.warrantyStartDate = warrantyStartDate;
+        this.warrantyEndDate = warrantyEndDate;
+        this.warrantyReason = warrantyReason;
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
     }
     
     public Long getId() {
@@ -107,6 +127,14 @@ public class OrderServiceDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void setWarrantyOrderServiceId(Long warrantyOrderServiceId) {
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
+    }
+    
+    public Long getWarrantyOrderServiceId() {
+        return warrantyOrderServiceId;
     }
 
     public Long getOrderId() {
@@ -219,5 +247,29 @@ public class OrderServiceDTO {
 
     public void setAlreadyCreated(Boolean alreadyCreated) {
         this.alreadyCreated = alreadyCreated;
+    }
+    
+    public void setWarrantyStartDate(Date warrantyStartDate) {
+        this.warrantyStartDate = warrantyStartDate;
+    }
+    
+    public Date getWarrantyStartDate() {
+        return warrantyStartDate;
+    }
+    
+    public void setWarrantyEndDate(Date warrantyEndDate) {
+        this.warrantyEndDate = warrantyEndDate;
+    }
+    
+    public Date getWarrantyEndDate() {
+        return warrantyEndDate;
+    }
+    
+    public void setWarrantyReason(String warrantyReason) {
+        this.warrantyReason = warrantyReason;
+    }
+    
+    public String getWarrantyReason() {
+        return warrantyReason;
     }
 }

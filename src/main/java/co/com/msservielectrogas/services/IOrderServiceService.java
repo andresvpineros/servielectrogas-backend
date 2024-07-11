@@ -1,11 +1,13 @@
 package co.com.msservielectrogas.services;
 
 import co.com.msservielectrogas.entity.OrderService;
+import co.com.msservielectrogas.entity.Warranty;
 import co.com.msservielectrogas.dto.OrderServiceDTO;
 import co.com.msservielectrogas.repository.IOrderServiceRepository;
 import co.com.msservielectrogas.repository.IServicesRepository;
 import co.com.msservielectrogas.repository.IOrderRepository;
 import co.com.msservielectrogas.repository.IUsersRepository;
+import co.com.msservielectrogas.repository.IWarrantyRepository;
 import co.com.msservielectrogas.enums.EPriority;
 import co.com.msservielectrogas.enums.EStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class IOrderServiceService {
 	
     @Autowired
     private IOrderServiceRepository orderServiceRepository;
+    
+    @Autowired
+    private IWarrantyRepository warrantyRepository;
 	
     @Autowired
     private IOrderRepository orderRepository;
@@ -30,11 +35,9 @@ public class IOrderServiceService {
     
     public OrderServiceDTO getOrderServiceById(Long id) {
     	OrderService orderService = orderServiceRepository.findById(id);
-    	
-        if (orderService == null) {
-            return null;
-        }
-        return convertToDTO(orderService);
+    	Warranty warranty = warrantyRepository.findByOrderServices(orderService.getId());
+
+        return convertToDTO(orderService, warranty);
     }
     
     public OrderServiceDTO createOrderService(OrderServiceDTO createOrderServiceDTO, Long orderId, Integer technicianId) {
@@ -51,8 +54,17 @@ public class IOrderServiceService {
     	orderService.setTechnician(usersRepository.findById(technicianId).orElse(null));
         
     	OrderService savedOrderService = orderServiceRepository.save(orderService);
+    	
+    	Warranty warranty = new Warranty();
+    	
+    	warranty.setStartDate(createOrderServiceDTO.getWarrantyStartDate());
+    	warranty.setEndDate(createOrderServiceDTO.getWarrantyEndDate());
+    	warranty.setReason(createOrderServiceDTO.getWarrantyReason());
+    	warranty.setOrderService(savedOrderService);
 
-        return convertToDTO(savedOrderService);
+    	Warranty savedWarranty = warrantyRepository.save(warranty);
+
+        return convertToDTO(savedOrderService, savedWarranty);
     }
     
     public OrderServiceDTO updateOrderService(OrderServiceDTO createOrderServiceDTO, Long orderId, Integer technicianId) {
@@ -67,13 +79,23 @@ public class IOrderServiceService {
     	orderService.setStatus(createOrderServiceDTO.getStatus());
         orderService.setCreatedAt(LocalDateTime.now());
     	orderService.setTechnician(usersRepository.findById(technicianId).orElse(null));
-        
-    	OrderService savedOrderService = orderServiceRepository.save(orderService);
+    	orderService.setWarrantyOrderServiceId(orderService.getId());
 
-        return convertToDTO(savedOrderService);
+    	OrderService savedOrderService = orderServiceRepository.save(orderService);
+    	
+    	Warranty warranty = new Warranty();
+    	
+    	warranty.setStartDate(createOrderServiceDTO.getWarrantyStartDate());
+    	warranty.setEndDate(createOrderServiceDTO.getWarrantyEndDate());
+    	warranty.setReason(createOrderServiceDTO.getWarrantyReason());
+    	warranty.setOrderService(savedOrderService);
+
+    	Warranty savedWarranty = warrantyRepository.save(warranty);
+
+        return convertToDTO(savedOrderService, savedWarranty);
     }
 
-    private OrderServiceDTO convertToDTO(OrderService orderService) {
+    private OrderServiceDTO convertToDTO(OrderService orderService, Warranty warranty) {
         EPriority priorityName = EPriority.values()[orderService.getPriority().intValue()];
         EStatus statusName = EStatus.values()[orderService.getStatus().intValue()];
 
@@ -91,7 +113,11 @@ public class IOrderServiceService {
         		orderService.getStatus(),
         		orderService.getCreatedAt(),
         		orderService.getTechnician().getName(),
-        		orderService.getTechnician().getId()
+        		orderService.getTechnician().getId(),
+        		warranty.getStartDate(),
+        		warranty.getEndDate(),
+        		warranty.getReason(),
+        		orderService.getId()
         );
     }
     

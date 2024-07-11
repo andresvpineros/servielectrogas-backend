@@ -36,9 +36,9 @@ public class IServicesService {
         		service.getServicesDescription(),
         		service.getPrice(),
         		typeName,
-        		service.getServicesType()
+        		service.getServicesType(),
+        		service.getProductName(),
+        		service.getWarrantyTime()
         );
     }
-    
- 
 }

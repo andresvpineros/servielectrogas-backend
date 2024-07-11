@@ -5,6 +5,7 @@ import co.com.msservielectrogas.entity.OrderService;
 import co.com.msservielectrogas.entity.Schedules;
 import co.com.msservielectrogas.entity.Clients;
 import co.com.msservielectrogas.entity.Users;
+import co.com.msservielectrogas.entity.Warranty;
 import co.com.msservielectrogas.dto.OrderDTO;
 import co.com.msservielectrogas.dto.OrderServiceDTO;
 import co.com.msservielectrogas.dto.ApiResponseDTO;
@@ -44,7 +45,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class IOrderService {
 
@@ -61,6 +63,9 @@ public class IOrderService {
     private ISchedulesRepository scheduleRepository;
     
     @Autowired
+    private IWarrantyRepository warrantyRepository;
+    
+    @Autowired
     private IClientService clientService;
     
     @Autowired
@@ -71,8 +76,11 @@ public class IOrderService {
     
     @Autowired
     private IOrderServiceRepository orderServiceRepository;
+    
     @Autowired
     private IServicesRepository servicesRepository;
+    
+    private static final Logger logger = LoggerFactory.getLogger(IOrderService.class);
 
     public Page<OrderDTO> getAllOrders(String search, String selectedStatus, String startDate, String endDate, Pageable pageable) {
         Specification<Order> spec = Specification.where(null); 
@@ -221,14 +229,33 @@ public class IOrderService {
                 orderService.setPriority(osDTO.getPriority());
                 orderService.setStatus(osDTO.getStatus());
                 orderService.setTechnician(userRepository.findById(orderDTO.getTechnicianId()).orElse(null));
+                orderService.setWarrantyOrderServiceId(osDTO.getWarrantyOrderServiceId());
 
                 if (osDTO.getAlreadyCreated()) {
                     orderService.setCreatedAt(osDTO.getCreatedAt());
                 } else {
                     orderService.setCreatedAt(LocalDateTime.now());
-                }
+                }                    
 
                 orderServiceRepository.save(orderService);
+                
+                if (osDTO.getWarrantyOrderServiceId() == null) {
+                    Warranty optionalWarranty = warrantyRepository.findByOrderServices(osDTO.getId());
+                    Warranty warranty;
+                    if (optionalWarranty != null) {
+                    	warranty = optionalWarranty;
+                    } else {
+                    	warranty = new Warranty();
+                    }
+
+                	warranty.setStartDate(osDTO.getWarrantyStartDate());
+                	warranty.setEndDate(osDTO.getWarrantyEndDate());
+                	warranty.setReason(osDTO.getWarrantyReason());
+                	warranty.setOrderService(orderService);
+
+                	warrantyRepository.save(warranty); 	
+                }             
+     
                 updatedOrderServiceDTOs.add(osDTO); 
             }
         }
@@ -448,10 +475,20 @@ public class IOrderService {
         orderServiceDTO.setPriorityName(priorityName);
         orderServiceDTO.setPriority(orderService.getPriority());
         orderServiceDTO.setStatusName(statusName);
+        orderServiceDTO.setWarrantyOrderServiceId(orderService.getWarrantyOrderServiceId());
         orderServiceDTO.setStatus(orderService.getStatus());
         orderServiceDTO.setCreatedAt(orderService.getCreatedAt());
         orderServiceDTO.setTechnicianName(orderService.getTechnician().getName());
         orderServiceDTO.setTechnicianId(orderService.getTechnician().getId());
+        
+        Warranty warranty = warrantyRepository.findByOrderServices(orderService.getId());
+        
+        if (warranty != null) {
+        	orderServiceDTO.setWarrantyStartDate(warranty.getStartDate());
+        	orderServiceDTO.setWarrantyEndDate(warranty.getEndDate());
+        	orderServiceDTO.setWarrantyReason(warranty.getReason());
+        }
+
         return orderServiceDTO;
     }
     

@@ -32,6 +32,9 @@ public class OrderService {
     @ManyToOne
     @JoinColumn(name = "technician_id")
     private Users technician;
+    
+    @JoinColumn(name = "warranty_order_service_id")
+    private Long warrantyOrderServiceId;
 
     public OrderService() {
     }
@@ -40,7 +43,7 @@ public class OrderService {
         this.id = id;
     }
         
-    public OrderService(Long id, Order order, Services service, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, Users technician) {
+    public OrderService(Long id, Order order, Services service, String observations, LocalDateTime orderServiceDate, Duration duration, Integer priority, Integer status, LocalDateTime createdAt, Users technician, Long warrantyOrderServiceId) {
         this.id = id;
         this.order = order;
         this.service = service;
@@ -51,6 +54,7 @@ public class OrderService {
         this.status = status;
         this.createdAt = createdAt;
         this.technician = technician;
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -62,7 +66,15 @@ public class OrderService {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    public void setWarrantyOrderServiceId(Long warrantyOrderServiceId) {
+        this.warrantyOrderServiceId = warrantyOrderServiceId;
+    }
+    
+    public Long getWarrantyOrderServiceId() {
+        return warrantyOrderServiceId;
+    }
+    
     public Order getOrder() {
         return order;
     }

@@ -25,6 +25,6 @@ public interface IServicesRepository extends JpaRepository<Services, Integer>{
 			+ "	WHERE orders_services.orders_id = :orderId", nativeQuery = true)
 	List<Services> findByOrdersId(Long orderId);
 	
-    @Query("SELECT c FROM Services c WHERE LOWER(c.servicesDescription) LIKE LOWER(CONCAT('%', :search, '%'))")
-    List<Services> searchServices(String search);
+	@Query("SELECT c FROM Services c WHERE LOWER(c.servicesDescription) LIKE LOWER(CONCAT('%', :search, '%')) ORDER BY c.id ASC")
+	List<Services> searchServices(String search);
 }
